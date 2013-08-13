@@ -169,6 +169,7 @@ bool kinematic_constraints::JointConstraint::configure(const moveit_msgs::JointC
 
       if (bounds.first > joint_position_ + joint_tolerance_above_)
       {
+				logWarn("bounds.first: %f ### joint_position_: %f ### joint_tolerance_above_: %f", bounds.first, joint_position_, joint_tolerance_above_);
         joint_position_ = bounds.first;
         joint_tolerance_above_ = std::numeric_limits<double>::epsilon();
         logWarn("Joint %s is constrained to be below the minimum bounds. Assuming minimum bounds instead.", jc.joint_name.c_str());

@@ -37,7 +37,7 @@
 #include <moveit/robot_state/robot_state.h>
 #include <geometric_shapes/shape_operations.h>
 #include <eigen_conversions/eigen_msg.h>
-
+#include <ros/console.h>
 robot_state::RobotState::RobotState(const robot_model::RobotModelConstPtr &kinematic_model) :
   kinematic_model_(kinematic_model)
 {
@@ -439,6 +439,8 @@ void robot_state::RobotState::attachBody(const std::string &id,
                                          const std::string &link,
                                          const sensor_msgs::JointState &detach_posture)
 {
+	//~ ROS_INFO_STREAM("detach_posture_set: " << detach_posture);
+
   LinkState *ls = getLinkState(link);
   if (ls)
   {

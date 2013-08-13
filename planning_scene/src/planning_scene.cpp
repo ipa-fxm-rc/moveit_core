@@ -44,7 +44,7 @@
 #include <octomap_msgs/conversions.h>
 #include <eigen_conversions/eigen_msg.h>
 #include <set>
-
+#include <ros/console.h>
 namespace planning_scene
 {
 const std::string PlanningScene::COLLISION_MAP_NS = "<collision_map>";
@@ -1534,6 +1534,7 @@ bool planning_scene::PlanningScene::processAttachedCollisionObjectMsg(const move
         if (kstate_->clearAttachedBody(object.object.id))
           logInform("The robot state already had an object named '%s' attached to link '%s'. The object was replaced.",
                     object.object.id.c_str(), object.link_name.c_str());
+        ROS_INFO_STREAM("object.detach_posture: " << object.detach_posture);            
         kstate_->attachBody(object.object.id, shapes, poses, object.touch_links, object.link_name, object.detach_posture);
         logInform("Attached object '%s' to link '%s'", object.object.id.c_str(), object.link_name.c_str());
       }

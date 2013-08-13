@@ -35,7 +35,7 @@
 /* Author: Ioan Sucan */
 
 #include <moveit/robot_state/attached_body.h>
-
+#include <ros/console.h>
 robot_state::AttachedBody::AttachedBody(const robot_model::LinkModel *parent_link_model,
                                         const std::string &id, 
                                         const std::vector<shapes::ShapeConstPtr> &shapes,
@@ -49,6 +49,7 @@ robot_state::AttachedBody::AttachedBody(const robot_model::LinkModel *parent_lin
   touch_links_(touch_links),
   detach_posture_(detach_posture)
 {
+	ROS_INFO_STREAM("THIS COMES FIRST FOR detach_posture_:  " << detach_posture);
   global_collision_body_transforms_.resize(attach_trans.size());
   for(std::size_t i = 0 ; i < global_collision_body_transforms_.size() ; ++i)
     global_collision_body_transforms_[i].setIdentity();

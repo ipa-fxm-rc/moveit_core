@@ -91,12 +91,14 @@ robot_model::JointModelGroup::JointModelGroup(const std::string& group_name,
   variable_count_(0), is_end_effector_(false), is_chain_(false),
   default_ik_timeout_(0.5), default_ik_attempts_(2)
 {
+	printf("group_name: %s\n",group_name.c_str());
   // sort joints in Depth-First order
   std::vector<const JointModel*> group_joints = unsorted_group_joints;
   std::sort(group_joints.begin(), group_joints.end(), &orderJointsByIndex);
   
   for (std::size_t i = 0 ; i < group_joints.size() ; ++i)
   {
+	  printf("joint %s added to joint_model_map_\n", group_joints[i]->getName().c_str());
     joint_model_map_[group_joints[i]->getName()] = group_joints[i];
     unsigned int vc = group_joints[i]->getVariableCount();
     if (vc > 0)
@@ -115,7 +117,7 @@ robot_model::JointModelGroup::JointModelGroup(const std::string& group_name,
     else
       fixed_joints_.push_back(group_joints[i]);
   }
-  
+  printf("\n");
   //now we need to find all the set of joints within this group
   //that root distinct subtrees
   for (std::size_t i = 0 ; i < joint_model_vector_.size() ; ++i)
